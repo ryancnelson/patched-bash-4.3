@@ -4,7 +4,8 @@ patched-bash-4.3
 patched-bash-4.3 for CVE-2014-6271
 
 
-This is just bash 4.3 , pulled from the gnu website, and patched with the patches available on 9/24/2014
+This is just bash 4.3 , pulled from the gnu website, and patched with the patches available on 9/24/2014.
+The patches are also included here, but I've already applied them to the sourcecode (for those unfamiliar with the ```patch``` command)
 
 Don't use this, if you don't know and trust me.  Build it yourself.
 
