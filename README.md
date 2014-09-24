@@ -10,7 +10,7 @@ Don't use this, if you don't know and trust me.  Build it yourself.
 
 I'm putting this on github so I can point friends and co-workers here.
 
-For hotpatching this in a SmartOS zone (like in JPC):
+#### For hotpatching this in a SmartOS zone (like in JPC):
 
 - clone this repo
 
