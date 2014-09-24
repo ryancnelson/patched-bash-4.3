@@ -46,7 +46,7 @@ There is NO WARRANTY, to the extent permitted by law.
 If you're interested, in SmartOS, in watching your system to see when ```bash``` is executed, you can, using DTrace:
 run this at your command line: 
 ```
-dtrace -n 'proc:::exec-success/basename(execname)=="bash"/{printf("%d executed %s\n", ppid, execname);}'
+dtrace -n 'proc:::exec-success /basename(execname)=="bash"/ {printf("%d executed %s\n", ppid, execname);}'
 ```
 ... then, log in again, or spawn some bash shells.  You should see lines like:
 ```
