@@ -31,10 +31,10 @@ There is NO WARRANTY, to the extent permitted by law.
 ```
 
 - mount this file, using the lofs mount trick , ON TOP of /usr/bin/bash :
--- you may need to reboot to kill off any currently running bash shells
--- after reboot, log back in, and run ``` exec /bin/sh ``` to confirm you're not using bash at the moment.
--- ``` ps -ef | grep bash ``` should return nothing.
--- then, mount /usr/local/bin/bash over /usr/bin/bash with: ```mount -F lofs /usr/local/bin/bash /usr/bin/bash ```
--- this lofs mount is not permenant.  re-do after reboots, or wait for a patched platform image.
+  -- you may need to reboot to kill off any currently running bash shells
+  -- after reboot, log back in, and run ``` exec /bin/sh ``` to confirm you're not using bash at the moment.
+  -- ``` ps -ef | grep bash ``` should return nothing.
+  -- then, mount /usr/local/bin/bash over /usr/bin/bash with: ```mount -F lofs /usr/local/bin/bash /usr/bin/bash ```
+  -- this lofs mount is not permenant.  re-do after reboots, or wait for a patched platform image.
 
 
