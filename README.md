@@ -19,7 +19,8 @@ For hotpatching this in a SmartOS zone (like in JPC):
 - ```cd bash-4.3```
 - ```make clean ; ./configure ; make ; make install ```
 - look at 
-```/usr/local/bin/bash --version 
+```
+/usr/local/bin/bash --version 
 GNU bash, version 4.3.25(1)-release (i386-pc-solaris2.11)
 Copyright (C) 2013 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -28,6 +29,7 @@ This is free software; you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 
 ```
+
 - mount this file, using the lofs mount trick , ON TOP of /usr/bin/bash :
 -- you may need to reboot to kill off any currently running bash shells
 -- after reboot, log back in, and run ``` exec /bin/sh ``` to confirm you're not using bash at the moment.
