@@ -13,4 +13,9 @@ I'm putting this on github so I can point friends and co-workers here.
 For SmartOS:
 
 - clone this repo
-	``` git clone https://github.com/ryancnelson/patched-bash-4.3 ```
+
+``` git clone https://github.com/ryancnelson/patched-bash-4.3 ```
+
+- ```cd bash-4.3```
+- ```make clean ; ./configure ; make ; make install ```
+
