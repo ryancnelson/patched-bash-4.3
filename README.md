@@ -37,4 +37,4 @@ There is NO WARRANTY, to the extent permitted by law.
   - then, mount /usr/local/bin/bash over /usr/bin/bash with: ```mount -F lofs /usr/local/bin/bash /usr/bin/bash ```
   - this lofs mount is not permenant.  re-do after reboots, or wait for a patched platform image.
 
-
+- confirm that ```/usr/bin/bash --version ``` returns the new 4.3 version you expect after the ```lofs mount``` command
