@@ -39,3 +39,20 @@ There is NO WARRANTY, to the extent permitted by law.
   - this lofs mount is not permanent.  re-do after reboots, or wait for a patched platform image.
 
 - confirm that ```/usr/bin/bash --version ``` returns the new 4.3 version you expect after the ```lofs mount``` command
+
+
+### for extra credit:
+
+If you're interested, in SmartOS, in watching your system to see when ```bash``` is executed, you can, using DTrace:
+run this at your command line: 
+```
+dtrace -n 'proc:::exec-success/basename(execname)=="bash"/{printf("%d executed %s\n", ppid, execname);}'
+```
+... then, log in again, or spawn some bash shells.  You should see lines like:
+```
+CPU     ID                    FUNCTION:NAME
+  1  11422         exec_common:exec-success 91178 executed bash
+```
+
+... this'll let you know whether your application(s) are forking bash under the covers, unbeknownst to you, as part of their normal operations, and whether you're exposed to external intruders being able to spawn bash and exploit it, remotely.
+
