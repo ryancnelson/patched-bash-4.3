@@ -48,9 +48,9 @@ localedir = ${datarootdir}/locale
 # Support an alternate destination root directory for package building
 DESTDIR =
 
-INSTALL = /opt/local/bin/ginstall -c
+INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
-BUILD_DIR = /usr/local/src/new-bash-9-2014/bash-4.3
+BUILD_DIR = /usr/local/src/patched-bash-4.3/bash-4.3
 
 LIBBUILD = ${BUILD_DIR}/lib
 
@@ -59,11 +59,11 @@ CFLAGS = -g -O2
 CFLAGS_FOR_BUILD = -g -O2 
 CPPFLAGS = 
 CPPFLAGS_FOR_BUILD = 
-LOCAL_CFLAGS = -DSOLARIS ${DEBUG}
+LOCAL_CFLAGS = -DMACOSX ${DEBUG}
 DEFS = -DHAVE_CONFIG_H
 LOCAL_DEFS = -DSHELL
 
-LIBS = -lsocket -lnsl -ldl 
+LIBS = -ldl 
 LDFLAGS =  $(LOCAL_LDFLAGS) $(CFLAGS)
 LDFLAGS_FOR_BUILD = $(LDFLAGS) $(LOCAL_LDFLAGS) $(CFLAGS_FOR_BUILD)
 LOCAL_LDFLAGS = 
@@ -78,9 +78,9 @@ INTL_LIBSRC = ${topdir}/lib/intl
 INTL_BUILDDIR = ${LIBBUILD}/intl
 INTL_LIBDIR = ${INTL_BUILDDIR}
 INTL_LIBRARY = ${INTL_BUILDDIR}/libintl.a
-INTL_INC = 
-INTL_DEP = 
-LIBINTL_H = 
+INTL_INC = -I${INTL_LIBSRC} -I${INTL_BUILDDIR}
+INTL_DEP = ${INTL_LIBDIR}/libintl.a
+LIBINTL_H = ${INTL_BUILDDIR}/libintl.h
 
 HELPDIR = 
 MKDIRS = ${topdir}/support/mkdirs

@@ -19,7 +19,7 @@ top_srcdir = ..
 
 
 topdir = ..
-BUILD_DIR = /usr/local/src/new-bash-9-2014/bash-4.3
+BUILD_DIR = /usr/local/src/patched-bash-4.3/bash-4.3
 
 prefix = /usr/local
 exec_prefix = ${prefix}
@@ -30,16 +30,16 @@ localedir = ${datarootdir}/locale
 
 gettextsrcdir = $(datadir)/gettext/po
 
-INSTALL = /opt/local/bin/ginstall -c
+INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 MKINSTALLDIRS = $(top_builddir)/./support/mkinstalldirs
 mkinstalldirs = $(SHELL) $(MKINSTALLDIRS)
 
-GMSGFMT = :
-MSGFMT = :
-XGETTEXT = :
+GMSGFMT = /opt/local/bin/msgfmt
+MSGFMT = /opt/local/bin/msgfmt
+XGETTEXT = /opt/local/bin/xgettext
 MSGMERGE = msgmerge
-MSGMERGE_UPDATE = : --update
+MSGMERGE_UPDATE = /opt/local/bin/msgmerge --update
 MSGINIT = msginit
 MSGCONV = msgconv
 MSGFILTER = msgfilter

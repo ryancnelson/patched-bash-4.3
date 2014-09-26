@@ -29,7 +29,7 @@ includedir = ${prefix}/include
 datarootdir = ${prefix}/share
 
 topdir = ../..
-BUILD_DIR = /usr/local/src/new-bash-9-2014/bash-4.3
+BUILD_DIR = /usr/local/src/patched-bash-4.3/bash-4.3
 srcdir = .
 VPATH = .
 
@@ -39,12 +39,12 @@ RM = rm -f
 
 SHELL = /bin/sh
 
-host_os = solaris2.11
-host_cpu = i386
-host_vendor = pc
+host_os = darwin13.3.0
+host_cpu = x86_64
+host_vendor = apple
 
 CFLAGS = -g -O2
-LOCAL_CFLAGS = -DSOLARIS
+LOCAL_CFLAGS = -DMACOSX
 DEFS = -DHAVE_CONFIG_H
 LOCAL_DEFS = -DSHELL
 
@@ -56,8 +56,8 @@ LIBBUILD = ${BUILD_DIR}/lib
 
 INTL_LIBSRC = ${topdir}/lib/intl
 INTL_BUILDDIR = ${LIBBUILD}/intl
-INTL_INC = 
-LIBINTL_H = 
+INTL_INC = -I${INTL_LIBSRC} -I${INTL_BUILDDIR}
+LIBINTL_H = ${INTL_BUILDDIR}/libintl.h
 
 CCFLAGS = $(DEFS) $(LOCAL_DEFS) $(LOCAL_CFLAGS) $(CFLAGS)
 
@@ -68,9 +68,9 @@ CCFLAGS = $(DEFS) $(LOCAL_DEFS) $(LOCAL_CFLAGS) $(CFLAGS)
 # changes to bash-maintainers@gnu.org.
 #
 SHOBJ_CC = gcc
-SHOBJ_CFLAGS = -fpic
+SHOBJ_CFLAGS = -fno-common
 SHOBJ_LD = ${CC}
-SHOBJ_LDFLAGS = -shared -Wl,-i -Wl,-h,$@ 
+SHOBJ_LDFLAGS = -dynamiclib -dynamic -undefined dynamic_lookup  
 SHOBJ_XLDFLAGS = 
 SHOBJ_LIBS = 
 SHOBJ_STATUS = supported

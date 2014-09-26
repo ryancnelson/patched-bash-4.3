@@ -58,8 +58,8 @@ htmldir = ${docdir}
 DESTDIR =
 
 topdir = .
-BUILD_DIR = /usr/local/src/new-bash-9-2014/bash-4.3
-top_builddir = /usr/local/src/new-bash-9-2014/bash-4.3
+BUILD_DIR = /usr/local/src/patched-bash-4.3/bash-4.3
+top_builddir = /usr/local/src/patched-bash-4.3/bash-4.3
 srcdir = .
 VPATH = .
 
@@ -75,7 +75,7 @@ ARFLAGS = cr
 RANLIB = ranlib
 SIZE = size
 
-INSTALL = /opt/local/bin/ginstall -c
+INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_DATA = ${INSTALL} -m 644
@@ -109,10 +109,10 @@ Version = 4.3
 PatchLevel = `$(BUILD_DIR)/$(VERSPROG) -p`
 RELSTATUS = release
 
-Machine = i386
-OS = solaris2.11
-VENDOR = pc
-MACHTYPE = i386-pc-solaris2.11
+Machine = x86_64
+OS = darwin13.3.0
+VENDOR = apple
+MACHTYPE = x86_64-apple-darwin13.3.0
 
 # comment out for release
 DEBUG = 
@@ -128,14 +128,14 @@ CFLAGS = -g -O2
 CFLAGS_FOR_BUILD = -g -O2 
 CPPFLAGS = 
 CPPFLAGS_FOR_BUILD = 
-LOCAL_CFLAGS = -DSOLARIS ${DEBUG} ${MALLOC_DEBUG}
+LOCAL_CFLAGS = -DMACOSX ${DEBUG} ${MALLOC_DEBUG}
 DEFS = -DHAVE_CONFIG_H
 LOCAL_DEFS = -DSHELL
 
 LOCALE_DEFS = -DLOCALEDIR='"$(localedir)"' -DPACKAGE='"$(PACKAGE)"'
 
 LOCAL_LIBS = 
-LIBS = $(BUILTINS_LIB) $(LIBRARIES) -lsocket -lnsl -ldl 
+LIBS = $(BUILTINS_LIB) $(LIBRARIES) -ldl 
 LIBS_FOR_BUILD = 
 
 STATIC_LD = 
@@ -177,8 +177,8 @@ LIBBUILD = ${BUILD_DIR}/${LIBSUBDIR}
 
 SUBDIR_INCLUDES = -I.  -I$(topdir) -I$(topdir)/$(LIBSUBDIR)
 
-BUILD_INCLUDED_LIBINTL = no
-USE_INCLUDED_LIBINTL = no
+BUILD_INCLUDED_LIBINTL = yes
+USE_INCLUDED_LIBINTL = yes
 
 # the bash library
 # the library is a mix of functions that the C library does not provide on
@@ -353,24 +353,24 @@ INTL_LIBDIR = $(dot)/$(LIBSUBDIR)/intl
 INTL_ABSSRC = ${topdir}/$(INTL_LIB)
 INTL_BUILDDIR = ${LIBBUILD}/intl
 
-INTL_LIB     = 
+INTL_LIB     = lib/intl/libintl.a -liconv
 INTL_LIBRARY = $(INTL_LIBDIR)/libintl.a
-INTL_DEP = 
-INTL_INC = 
+INTL_DEP = ${INTL_LIBDIR}/libintl.a
+INTL_INC = -I${INTL_LIBSRC} -I${INTL_BUILDDIR}
 
-LIBINTL_H = 
+LIBINTL_H = ${INTL_BUILDDIR}/libintl.h
 
 # libiconv
-LIBICONV = 
+LIBICONV = -liconv
 
 # tests
-LIBINTL = 
-LTLIBINTL = 
-INTLLIBS = 
-INTLOBJS = 
+LIBINTL = lib/intl/libintl.a -liconv
+LTLIBINTL = lib/intl/libintl.a -liconv
+INTLLIBS = lib/intl/libintl.a -liconv
+INTLOBJS = $(GETTOBJS)
 
 # Our malloc.
-MALLOC_TARGET = malloc
+MALLOC_TARGET = 
 
 # set to alloca.o if we are using the C alloca in lib/malloc
 ALLOCA = 
@@ -379,16 +379,16 @@ ALLOC_LIBSRC = $(LIBSRC)/malloc
 ALLOC_LIBDIR = $(dot)/$(LIBSUBDIR)/malloc
 ALLOC_ABSSRC = ${topdir}/$(ALLOC_LIBDIR)
 
-MALLOC_SRC = malloc.c
+MALLOC_SRC = 
 MALLOC_OTHERSRC = ${ALLOC_LIBSRC}/trace.c ${ALLOC_LIBSRC}/stats.c \
 		  ${ALLOC_LIBSRC}/table.c ${ALLOC_LIBSRC}/watch.c
 MALLOC_SOURCE = ${ALLOC_LIBSRC}/${MALLOC_SRC} ${MALLOC_OTHERSRC}
 MALLOC_CFLAGS = -DRCHECK -Dbotch=programming_error ${MALLOC_DEBUG}
 
-MALLOC_LIB     = -lmalloc
-MALLOC_LIBRARY = $(ALLOC_LIBDIR)/libmalloc.a
-MALLOC_LDFLAGS = -L$(ALLOC_LIBDIR)
-MALLOC_DEP = $(MALLOC_LIBRARY)
+MALLOC_LIB     = 
+MALLOC_LIBRARY = 
+MALLOC_LDFLAGS = 
+MALLOC_DEP = 
 
 ALLOC_HEADERS = $(ALLOC_LIBSRC)/getpagesize.h $(ALLOC_LIBSRC)/shmalloc.h \
 		$(ALLOC_LIBSRC)/imalloc.h $(ALLOC_LIBSRC)/mstats.h \

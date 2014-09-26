@@ -214,10 +214,10 @@
 #define SIZEOF_INT 4
 
 /* The number of bytes in a long.  */
-#define SIZEOF_LONG 4
+#define SIZEOF_LONG 8
 
 /* The number of bytes in a pointer to char.  */
-#define SIZEOF_CHAR_P 4
+#define SIZEOF_CHAR_P 8
 
 /* The number of bytes in a double (hopefully 8). */
 #define SIZEOF_DOUBLE 8
@@ -251,7 +251,7 @@
 /* Memory management functions. */
 
 /* Define if using the bash version of malloc in lib/malloc/malloc.c */
-#define USING_BASH_MALLOC 1
+/* #undef USING_BASH_MALLOC */
 
 /* #undef DISABLE_MALLOC_WRAPPERS */
 
@@ -296,7 +296,7 @@
 #define u_bits32_t unsigned int
 
 /* Define to `double' if <sys/types.h> doesn't define. */
-#define bits64_t double
+#define bits64_t char *
 
 /* Define to `unsigned int' if <sys/types.h> doesn't define. */
 /* #undef u_int */
@@ -375,51 +375,51 @@
    libraries. */
 
 /* Define if `sys_siglist' is declared by <signal.h> or <unistd.h>.  */
-#define HAVE_DECL_SYS_SIGLIST 0
+#define HAVE_DECL_SYS_SIGLIST 1
 /* #undef SYS_SIGLIST_DECLARED */
 
 /* Define if `_sys_siglist' is declared by <signal.h> or <unistd.h>.  */
-#define UNDER_SYS_SIGLIST_DECLARED 1
+/* #undef UNDER_SYS_SIGLIST_DECLARED */
 
-/* #undef HAVE_SYS_SIGLIST */
+#define HAVE_SYS_SIGLIST 1
 
-#define HAVE_UNDER_SYS_SIGLIST 1
+/* #undef HAVE_UNDER_SYS_SIGLIST */
 
 #define HAVE_SYS_ERRLIST 1
 
-#define HAVE_TZNAME 1
-#define HAVE_DECL_TZNAME 1
+/* #undef HAVE_TZNAME */
+/* #undef HAVE_DECL_TZNAME */
 
 /* Characteristics of some of the system structures. */
 
 #define HAVE_STRUCT_DIRENT_D_INO 1
 
-/* #undef HAVE_STRUCT_DIRENT_D_FILENO */
+#define HAVE_STRUCT_DIRENT_D_FILENO 1
 
-/* #undef HAVE_STRUCT_DIRENT_D_NAMLEN */
+#define HAVE_STRUCT_DIRENT_D_NAMLEN 1
 
-/* #undef TIOCSTAT_IN_SYS_IOCTL */
+#define TIOCSTAT_IN_SYS_IOCTL 1
 
-/* #undef FIONREAD_IN_SYS_IOCTL */
+#define FIONREAD_IN_SYS_IOCTL 1
 
 /* #undef GWINSZ_IN_SYS_IOCTL */
 
-/* #undef STRUCT_WINSIZE_IN_SYS_IOCTL */
+#define STRUCT_WINSIZE_IN_SYS_IOCTL 1
 
 /* #undef TM_IN_SYS_TIME */
 
-#define STRUCT_WINSIZE_IN_TERMIOS 1
+/* #undef STRUCT_WINSIZE_IN_TERMIOS */
 
 /* #undef SPEED_T_IN_SYS_TYPES */
 
 /* #undef TERMIOS_LDISC */
 
-#define TERMIO_LDISC 1
+/* #undef TERMIO_LDISC */
 
 #define HAVE_STRUCT_STAT_ST_BLOCKS 1
 
-/* #undef HAVE_STRUCT_TM_TM_ZONE */
-/* #undef HAVE_TM_ZONE */
+#define HAVE_STRUCT_TM_TM_ZONE 1
+#define HAVE_TM_ZONE 1
 
 #define HAVE_TIMEVAL 1
 
@@ -432,8 +432,8 @@
 /* #undef SYS_TIME_H_DEFINES_STRUCT_TIMESPEC */
 /* #undef PTHREAD_H_DEFINES_STRUCT_TIMESPEC */
 
-#define TYPEOF_STRUCT_STAT_ST_ATIM_IS_STRUCT_TIMESPEC 1
-/* #undef HAVE_STRUCT_STAT_ST_ATIMESPEC_TV_NSEC */
+/* #undef TYPEOF_STRUCT_STAT_ST_ATIM_IS_STRUCT_TIMESPEC */
+#define HAVE_STRUCT_STAT_ST_ATIMESPEC_TV_NSEC 1
 /* #undef HAVE_STRUCT_STAT_ST_ATIMENSEC */
 /* #undef HAVE_STRUCT_STAT_ST_ATIM_ST__TIM_TV_NSEC */
 
@@ -462,7 +462,7 @@
 
 /* #undef PRI_MACROS_BROKEN */
 
-/* #undef STRTOLD_BROKEN */
+#define STRTOLD_BROKEN 1
 
 /* Define if WCONTINUED is defined in system headers, but rejected by waitpid */
 /* #undef WCONTINUED_BROKEN */
@@ -494,7 +494,7 @@
 
 /* #undef STAT_MACROS_BROKEN */
 
-#define ULIMIT_MAXFDS 1
+/* #undef ULIMIT_MAXFDS */
 
 #define CAN_REDEFINE_GETENV 1
 
@@ -524,7 +524,7 @@
 #define HAVE_DEV_STDIN 1
 
 /* The type of iconv's `inbuf' argument */
-#define ICONV_CONST const
+#define ICONV_CONST 
 
 /* Type and behavior of signal handling functions. */
 
@@ -569,10 +569,10 @@
 #define HAVE_DLSYM 1
 
 /* Define if you don't have vprintf but do have _doprnt.  */
-#define HAVE_DOPRNT 1
+/* #undef HAVE_DOPRNT */
 
 /* Define if you have the dprintf function.  */
-/* #undef HAVE_DPRINTF */
+#define HAVE_DPRINTF 1
 
 /* Define if you have the dup2 function.  */
 #define HAVE_DUP2 1
@@ -581,18 +581,18 @@
 /* #undef HAVE_EACCESS */
 
 /* Define if you have the faccessat function.  */
-#define HAVE_FACCESSAT 1
+/* #undef HAVE_FACCESSAT */
 
 /* Define if you have the fcntl function.  */
 #define HAVE_FCNTL 1
 
 /* Define if you have the fpurge/__fpurge function.  */
-/* #undef HAVE_FPURGE */
-#define HAVE___FPURGE 1
-#define HAVE_DECL_FPURGE 0
+#define HAVE_FPURGE 1
+/* #undef HAVE___FPURGE */
+#define HAVE_DECL_FPURGE 1
 
 /* Define if you have the getaddrinfo function. */
-/* #undef HAVE_GETADDRINFO */
+#define HAVE_GETADDRINFO 1
 
 /* Define if you have the getcwd function.  */
 #define HAVE_GETCWD 1
@@ -631,10 +631,10 @@
 #define HAVE_GETRUSAGE 1
 
 /* Define if you have the getservbyname function.  */
-/* #undef HAVE_GETSERVBYNAME */
+#define HAVE_GETSERVBYNAME 1
 
 /* Define if you have the getservent function.  */
-/* #undef HAVE_GETSERVENT */
+#define HAVE_GETSERVENT 1
 
 /* Define if you have the gettimeofday function.  */
 #define HAVE_GETTIMEOFDAY 1
@@ -649,7 +649,7 @@
 #define HAVE_IMAXDIV 1
 
 /* Define if you have the inet_aton function.  */
-/* #undef HAVE_INET_ATON */
+#define HAVE_INET_ATON 1
 
 /* Define if you have the isascii function. */
 #define HAVE_ISASCII 1
@@ -688,7 +688,7 @@
 #define HAVE_LSTAT 1
 
 /* Define if you have the locale_charset function. */
-/* #undef HAVE_LOCALE_CHARSET */
+#define HAVE_LOCALE_CHARSET 1
 
 /* Define if you have the mbrlen function. */
 #define HAVE_MBRLEN 1
@@ -706,7 +706,7 @@
 /* #undef HAVE_MBSCMP */
 
 /* Define if you have the mbsnrtowcs function. */
-/* #undef HAVE_MBSNRTOWCS */
+#define HAVE_MBSNRTOWCS 1
 
 /* Define if you have the mbsrtowcs function. */
 #define HAVE_MBSRTOWCS 1
@@ -791,7 +791,7 @@
 #define HAVE_STRCHR 1
 
 /* Define if you have the strchrnul function.  */
-#define HAVE_STRCHRNUL 1
+/* #undef HAVE_STRCHRNUL */
 
 /* Define if you have the strcoll function.  */
 #define HAVE_STRCOLL 1
@@ -991,7 +991,7 @@
 #define HAVE_SYS_PARAM_H 1
 
 /* Define if you have the <sys/pte.h> header file.  */
-#define HAVE_SYS_PTE_H 1
+/* #undef HAVE_SYS_PTE_H */
 
 /* Define if you have the <sys/ptem.h> header file.  */
 /* #undef HAVE_SYS_PTEM_H */
@@ -1009,7 +1009,7 @@
 #define HAVE_SYS_STAT_H 1
 
 /* Define if you have the <sys/stream.h> header file.  */
-#define HAVE_SYS_STREAM_H 1
+/* #undef HAVE_SYS_STREAM_H */
 
 /* Define if you have <sys/time.h> */
 #define HAVE_SYS_TIME_H 1
@@ -1026,10 +1026,10 @@
 #define HAVE_SYS_WAIT_H 1
 
 /* Define if you have the <termcap.h> header file.  */
-/* #undef HAVE_TERMCAP_H */
+#define HAVE_TERMCAP_H 1
 
 /* Define if you have the <termio.h> header file.  */
-#define HAVE_TERMIO_H 1
+/* #undef HAVE_TERMIO_H */
 
 /* Define if you have the <termios.h> header file.  */
 #define HAVE_TERMIOS_H 1
@@ -1055,7 +1055,7 @@
 
 /* #undef HAVE_LIBSUN */
 
-#define HAVE_LIBSOCKET 1
+/* #undef HAVE_LIBSOCKET */
 
 /* Are we running the GNU C library, version 2.1 or later? */
 /* #undef GLIBC21 */
@@ -1080,7 +1080,7 @@
 /* #undef RLIMIT_NEEDS_KERNEL */
 
 /* Number of bits in a file offset, on hosts where this is settable. */
-#define _FILE_OFFSET_BITS 64
+/* #undef _FILE_OFFSET_BITS */
 
 /* Define for large files on AIX-style hosts. */
 /* #undef _LARGE_FILES */
@@ -1090,7 +1090,7 @@
 
 /* #undef DUP2_BROKEN */
 
-#define GETCWD_BROKEN 1
+/* #undef GETCWD_BROKEN */
 
 /* Additional defines for configuring lib/intl, maintained by autoscan/autoheader */
 
@@ -1104,13 +1104,13 @@
 #define HAVE_FCNTL_H 1
 
 /* Define if you have the <malloc.h> header file. */
-#define HAVE_MALLOC_H 1
+/* #undef HAVE_MALLOC_H */
 
 /* Define if you have the <stdio_ext.h> header file. */
-#define HAVE_STDIO_EXT_H 1
+/* #undef HAVE_STDIO_EXT_H */
 
 /* Define if you have the `dcgettext' function. */
-#define HAVE_DCGETTEXT 1
+/* #undef HAVE_DCGETTEXT */
 
 /* Define if you have the `localeconv' function. */
 #define HAVE_LOCALECONV 1

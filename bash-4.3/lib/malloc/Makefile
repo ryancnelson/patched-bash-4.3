@@ -18,9 +18,9 @@
 srcdir = .
 VPATH = .
 topdir = ../..
-BUILD_DIR = /usr/local/src/new-bash-9-2014/bash-4.3
+BUILD_DIR = /usr/local/src/patched-bash-4.3/bash-4.3
 
-INSTALL = /opt/local/bin/ginstall -c
+INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_DATA = ${INSTALL} -m 644
 
@@ -37,7 +37,7 @@ SHELL = /bin/sh
 PROFILE_FLAGS = 
 
 CFLAGS = -g -O2
-LOCAL_CFLAGS = -DSOLARIS
+LOCAL_CFLAGS = -DMACOSX
 CPPFLAGS = 
 LDFLAGS = 
 
@@ -50,8 +50,8 @@ BASHINCDIR = ${topdir}/include
 
 INTL_LIBSRC = ${topdir}/lib/intl
 INTL_BUILDDIR = ${LIBBUILD}/intl
-INTL_INC = 
-LIBINTL_H = 
+INTL_INC = -I${INTL_LIBSRC} -I${INTL_BUILDDIR}
+LIBINTL_H = ${INTL_BUILDDIR}/libintl.h
 
 INCLUDES = -I. -I../.. -I$(topdir) -I$(BASHINCDIR) -I$(topdir)/lib $(INTL_INC)
 
@@ -70,7 +70,7 @@ STUB_SOURCE = stub.c
 ALLOCA_SOURCE = alloca.c
 ALLOCA_OBJECT = alloca.o
 
-MALLOC_SRC = malloc.c
+MALLOC_SRC = 
 MALLOC = @MALLOC@
 ALLOCA = 
 

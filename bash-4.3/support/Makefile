@@ -29,7 +29,7 @@
 topdir = ..
 srcdir = .
 VPATH = .
-BUILD_DIR = /usr/local/src/new-bash-9-2014/bash-4.3
+BUILD_DIR = /usr/local/src/patched-bash-4.3/bash-4.3
 
 RM	= rm -f
 SHELL	= /bin/sh
@@ -47,11 +47,11 @@ CFLAGS = -g -O2
 CFLAGS_FOR_BUILD = -g -O2
 CPPFLAGS = 
 CPPFLAGS_FOR_BUILD = 
-LOCAL_CFLAGS = -DSOLARIS
+LOCAL_CFLAGS = -DMACOSX
 DEFS = -DHAVE_CONFIG_H
 LOCAL_DEFS = -DSHELL
 
-LIBS = -lsocket -lnsl -ldl 
+LIBS = -ldl 
 LIBS_FOR_BUILD = ${LIBS}		# XXX
 
 LOCAL_LDFLAGS = 

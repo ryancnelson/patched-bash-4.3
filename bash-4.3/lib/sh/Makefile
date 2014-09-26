@@ -28,7 +28,7 @@ PACKAGE_VERSION = 4.3-release
 srcdir = .
 VPATH = .
 topdir = ../..
-BUILD_DIR = /usr/local/src/new-bash-9-2014/bash-4.3
+BUILD_DIR = /usr/local/src/patched-bash-4.3/bash-4.3
 
 LIBBUILD = ${BUILD_DIR}/lib
 
@@ -36,12 +36,12 @@ BASHINCDIR = ${topdir}/include
 
 INTL_LIBSRC = ${topdir}/lib/intl
 INTL_BUILDDIR = ${LIBBUILD}/intl
-INTL_INC = 
-LIBINTL_H = 
+INTL_INC = -I${INTL_LIBSRC} -I${INTL_BUILDDIR}
+LIBINTL_H = ${INTL_BUILDDIR}/libintl.h
 
 datarootdir = ${prefix}/share
 
-INSTALL = /opt/local/bin/ginstall -c
+INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_DATA = ${INSTALL} -m 644
 
@@ -56,7 +56,7 @@ MV = mv
 SHELL = /bin/sh
 
 CFLAGS = -g -O2
-LOCAL_CFLAGS = -DSOLARIS ${DEBUG}
+LOCAL_CFLAGS = -DMACOSX ${DEBUG}
 CPPFLAGS = 
 LDFLAGS =  
 
@@ -98,7 +98,7 @@ CSOURCES = clktck.c clock.c getcwd.c getenv.c oslib.c setlinebuf.c \
 HSOURCES = 
 
 # The object files contained in $(LIBRARY_NAME)
-LIBOBJS =  ${LIBOBJDIR}dprintf$U.o ${LIBOBJDIR}mbschr$U.o ${LIBOBJDIR}inet_aton$U.o ${LIBOBJDIR}getcwd$U.o
+LIBOBJS =  ${LIBOBJDIR}strchrnul$U.o ${LIBOBJDIR}mktime$U.o ${LIBOBJDIR}mbschr$U.o
 OBJECTS = clktck.o clock.o getenv.o oslib.o setlinebuf.o strnlen.o \
 	  itos.o zread.o zwrite.o shtty.o shmatch.o eaccess.o \
 	  netconn.o netopen.o timeval.o makepath.o pathcanon.o \

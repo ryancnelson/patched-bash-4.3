@@ -30,7 +30,7 @@ includedir = ${prefix}/include
 datarootdir = ${prefix}/share
 
 topdir = ../../..
-BUILD_DIR = /usr/local/src/new-bash-9-2014/bash-4.3
+BUILD_DIR = /usr/local/src/patched-bash-4.3/bash-4.3
 srcdir = .
 VPATH = .
 
@@ -51,9 +51,9 @@ CFLAGS = -g -O2
 # changes to bash-maintainers@gnu.org.
 #
 SHOBJ_CC = gcc
-SHOBJ_CFLAGS = -fpic
+SHOBJ_CFLAGS = -fno-common
 SHOBJ_LD = ${CC}
-SHOBJ_LDFLAGS = -shared -Wl,-i -Wl,-h,$@
+SHOBJ_LDFLAGS = -dynamiclib -dynamic -undefined dynamic_lookup 
 SHOBJ_XLDFLAGS = 
 SHOBJ_LIBS = 
 SHOBJ_STATUS = supported

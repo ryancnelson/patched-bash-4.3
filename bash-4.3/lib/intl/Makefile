@@ -22,7 +22,7 @@ SHELL = /bin/sh
 
 srcdir = .
 top_srcdir = ../..
-top_builddir = /usr/local/src/new-bash-9-2014/bash-4.3
+top_builddir = /usr/local/src/patched-bash-4.3/bash-4.3
 
 
 prefix = /usr/local
@@ -42,7 +42,7 @@ subdir = intl
 
 
 
-INSTALL = /opt/local/bin/ginstall -c
+INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 MKINSTALLDIRS = $(top_builddir)/./support/mkinstalldirs
 mkinstalldirs = $(SHELL) $(MKINSTALLDIRS)
@@ -69,7 +69,7 @@ DEFS = -DLOCALEDIR=\"$(localedir)\" -DLOCALE_ALIAS_PATH=\"$(aliaspath)\" \
 CPPFLAGS = 
 CFLAGS = -g -O2
 LDFLAGS = 
-LIBS = -lsocket -lnsl -ldl 
+LIBS = -ldl 
 
 COMPILE = $(CC) -c $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS) $(XCFLAGS)
 
@@ -140,9 +140,9 @@ Makefile.vms libgnuintl.h.msvc-shared README.woe32 Makefile.msvc
 DISTFILES.obsolete = xopen-msg.sed linux-msg.sed po2tbl.sed.in cat-compat.c \
 COPYING.LIB-2 gettext.h libgettext.h plural-eval.c libgnuintl.h
 
-all: all-no
+all: all-yes
 all-yes: libintl.$la libintl.h charset.alias ref-add.sed ref-del.sed
-all-no: all-no-no
+all-no: all-no-yes
 all-no-yes: libgnuintl.$la
 all-no-no:
 
@@ -154,7 +154,7 @@ libintl.a libgnuintl.a: $(OBJECTS)
 libintl.la libgnuintl.la: $(OBJECTS)
 	$(LIBTOOL) --mode=link \
 	  $(CC) $(CPPFLAGS) $(CFLAGS) $(XCFLAGS) $(LDFLAGS) -o $@ \
-	  $(OBJECTS)  $(LIBS) \
+	  $(OBJECTS) -liconv $(LIBS) \
 	  -version-info $(LTV_CURRENT):$(LTV_REVISION):$(LTV_AGE) \
 	  -rpath $(libdir) \
 	  -no-undefined
@@ -239,7 +239,7 @@ libintl.h: libgnuintl.h
 	cmp libgnuintl.h libintl.h || cp libgnuintl.h libintl.h
 
 charset.alias: $(srcdir)/config.charset
-	$(SHELL) $(srcdir)/config.charset 'i386-pc-solaris2.11' > t-$@
+	$(SHELL) $(srcdir)/config.charset 'x86_64-apple-darwin13.3.0' > t-$@
 	mv t-$@ $@
 
 check: all
@@ -252,7 +252,7 @@ check: all
 install: install-exec install-data
 install-exec: all
 	if { test "$(PACKAGE)" = "gettext-runtime" || test "$(PACKAGE)" = "gettext-tools"; } \
-	   && test 'no' = yes; then \
+	   && test 'yes' = yes; then \
 	  $(mkinstalldirs) $(DESTDIR)$(libdir) $(DESTDIR)$(includedir); \
 	  $(INSTALL_DATA) libintl.h $(DESTDIR)$(includedir)/libintl.h; \
 	  $(LIBTOOL) --mode=install \
@@ -267,7 +267,7 @@ install-exec: all
 	  : ; \
 	fi
 	if test "$(PACKAGE)" = "gettext-tools" \
-	   && test 'no' = no; then \
+	   && test 'yes' = no; then \
 	  $(mkinstalldirs) $(DESTDIR)$(libdir); \
 	  $(LIBTOOL) --mode=install \
 	    $(INSTALL_DATA) libgnuintl.$la $(DESTDIR)$(libdir)/libgnuintl.$la; \
@@ -278,7 +278,7 @@ install-exec: all
 	else \
 	  : ; \
 	fi
-	if test 'no' = yes; then \
+	if test 'yes' = yes; then \
 	  $(mkinstalldirs) $(DESTDIR)$(localedir); \
 	  test -f $(DESTDIR)$(localedir)/locale.alias \
 	    && orig=$(DESTDIR)$(localedir)/locale.alias \
@@ -320,18 +320,18 @@ install-strip: install
 
 installdirs:
 	if { test "$(PACKAGE)" = "gettext-runtime" || test "$(PACKAGE)" = "gettext-tools"; } \
-	   && test 'no' = yes; then \
+	   && test 'yes' = yes; then \
 	  $(mkinstalldirs) $(DESTDIR)$(libdir) $(DESTDIR)$(includedir); \
 	else \
 	  : ; \
 	fi
 	if test "$(PACKAGE)" = "gettext-tools" \
-	   && test 'no' = no; then \
+	   && test 'yes' = no; then \
 	  $(mkinstalldirs) $(DESTDIR)$(libdir); \
 	else \
 	  : ; \
 	fi
-	if test 'no' = yes; then \
+	if test 'yes' = yes; then \
 	  test no != no || $(mkinstalldirs) $(DESTDIR)$(libdir); \
 	  $(mkinstalldirs) $(DESTDIR)$(localedir); \
 	else \
@@ -348,7 +348,7 @@ installcheck:
 
 uninstall:
 	if { test "$(PACKAGE)" = "gettext-runtime" || test "$(PACKAGE)" = "gettext-tools"; } \
-	   && test 'no' = yes; then \
+	   && test 'yes' = yes; then \
 	  rm -f $(DESTDIR)$(includedir)/libintl.h; \
 	  $(LIBTOOL) --mode=uninstall \
 	    rm -f $(DESTDIR)$(libdir)/libintl.$la; \
@@ -356,12 +356,12 @@ uninstall:
 	  : ; \
 	fi
 	if test "$(PACKAGE)" = "gettext-tools" \
-	   && test 'no' = no; then \
+	   && test 'yes' = no; then \
 	  rm -f $(DESTDIR)$(libdir)/preloadable_libintl.so; \
 	else \
 	  : ; \
 	fi
-	if test 'no' = yes; then \
+	if test 'yes' = yes; then \
 	  if test -f $(DESTDIR)$(prefix)/libdata/charset.alias; then \
 	    temp=$(DESTDIR)$(prefix)/libdata/t-charset.alias; \
 	    dest=$(DESTDIR)$(prefix)/libdata/charset.alias; \

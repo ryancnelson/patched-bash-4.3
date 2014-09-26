@@ -56,9 +56,9 @@ man1dir = $(mandir)/$(manpfx)1
 man3ext = .3
 man3dir = $(mandir)/$(manpfx)3
 
-INSTALL = /opt/local/bin/ginstall -c
+INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
-BUILD_DIR = /usr/local/src/new-bash-9-2014/bash-4.3
+BUILD_DIR = /usr/local/src/patched-bash-4.3/bash-4.3
 
 SUPPORT_SRCDIR = $(topdir)/support
 
